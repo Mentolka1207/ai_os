@@ -7,168 +7,385 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#05070f;color:#cfe3ff;font-family:'JetBrains Mono',monospace}
-header{padding:80px 20px;text-align:center;background:linear-gradient(180deg,#070b18,#05070f)}
-h1{font-family:Orbitron;font-size:64px;margin:0;background:linear-gradient(90deg,#00d4ff,#7b2fff,#00ffa6);-webkit-background-clip:text;color:transparent}
+
 nav{position:sticky;top:0;background:#070b18;border-bottom:1px solid #14223a;display:flex;justify-content:center;gap:30px;padding:14px;z-index:5}
 nav a{color:#8fb3ff;text-decoration:none;font-size:14px}
+
+.page{display:none}
+.page.active{display:block}
+
+header{padding:80px 20px;text-align:center;background:linear-gradient(180deg,#070b18,#05070f)}
+h1{font-family:Orbitron;font-size:64px;margin:0;background:linear-gradient(90deg,#00d4ff,#7b2fff,#00ffa6);-webkit-background-clip:text;color:transparent}
+
 section{max-width:1100px;margin:auto;padding:60px 20px}
+
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+
 .card{background:#0b1326;border:1px solid #1d2b47;padding:20px;border-radius:6px}
 .card h3{margin-top:0;font-family:Orbitron}
-.download{display:flex;gap:20px;flex-wrap:wrap}
-.btn{background:#00d4ff;color:black;padding:14px 22px;border-radius:6px;text-decoration:none;font-weight:bold}
+
+.btn{background:#00d4ff;color:black;padding:14px 22px;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block}
+
 footer{text-align:center;padding:40px;border-top:1px solid #14223a;color:#6f8bbd}
+
 video{width:100%;border:1px solid #1c2c4a;border-radius:6px}
+
+/* architecture diagram */
+.arch{
+max-width:700px;
+margin:auto;
+display:flex;
+flex-direction:column;
+}
+
+.layer{
+padding:18px;
+border:1px solid #243a5f;
+margin:6px 0;
+text-align:center;
+background:#0b1326;
+cursor:pointer;
+transition:0.2s
+}
+
+.layer:hover{
+background:#13203b
+}
+
+.layer.active{
+border-color:#00d4ff;
+box-shadow:0 0 15px #00d4ff55
+}
+
+.arch-desc{
+margin-top:20px;
+padding:20px;
+background:#0b1326;
+border:1px solid #243a5f
+}
+
 .code{background:#0b1326;border:1px solid #223455;padding:16px;border-radius:6px;font-size:13px}
-.community-links a{display:block;margin:6px 0;color:#9cc3ff;text-decoration:none}
+
 </style>
 </head>
 <body>
 
 <nav>
-<a href="#home">Home</a>
-<a href="#features">Features</a>
-<a href="#architecture">Architecture</a>
-<a href="#download">Download</a>
-<a href="#docs">Docs</a>
-<a href="#community">Community</a>
-<a href="#github">GitHub</a>
+<a href="#" onclick="openPage('home')">Home</a>
+<a href="#" onclick="openPage('download')">Download</a>
+<a href="#" onclick="openPage('architecture')">Architecture</a>
+<a href="#" onclick="openPage('docs')">Documentation</a>
+<a href="#" onclick="openPage('community')">Community</a>
+<a href="#" onclick="openPage('github')">GitHub</a>
 </nav>
 
-<header id="home">
+<!-- HOME -->
+<div class="page active" id="home">
+<header>
 <h1>AI_OS</h1>
 <p>Artificial Intelligence Operating System</p>
 </header>
 
 <section>
-<h2>About AI_OS</h2>
-<p>AI_OS — экспериментальная операционная система нового поколения с встроенным искусственным интеллектом. Система объединяет microkernel на C++, AI‑модули, современный GPU‑интерфейс и поддержку x86_64 и ARM64.</p>
+<h2>Next Generation Operating System</h2>
+<p>AI_OS — операционная система нового поколения с интегрированным искусственным интеллектом, microkernel архитектурой и GPU ускоренным интерфейсом.</p>
 </section>
 
-<section id="features">
-<h2>Features</h2>
-<div class="grid">
-<div class="card"><h3>AI Assistant</h3><p>AI помогает управлять системой, запускать программы и диагностировать ошибки.</p></div>
-<div class="card"><h3>Modern GUI</h3><p>GPU‑ускоренный интерфейс с поддержкой тем и анимаций.</p></div>
-<div class="card"><h3>Package Manager</h3><p>aipkg — система пакетов для установки приложений.</p></div>
-<div class="card"><h3>Secure System</h3><p>Sandbox, Secure Boot и изоляция процессов.</p></div>
+<section class="grid">
+<div class="card">
+<h3>AI Native</h3>
+<p>AI встроен в систему: команды, поиск, диагностика.</p>
+</div>
+
+<div class="card">
+<h3>Modern Kernel</h3>
+<p>C++ microkernel с высокой безопасностью.</p>
+</div>
+
+<div class="card">
+<h3>GPU Interface</h3>
+<p>Интерфейс на базе Vulkan.</p>
+</div>
+
+<div class="card">
+<h3>Cross Platform</h3>
+<p>Поддержка x86_64 и ARM64.</p>
 </div>
 </section>
-
-<section id="architecture">
-<h2>System Architecture</h2>
-<div class="grid">
-<div class="card"><h3>Kernel</h3><p>C++ microkernel управляет памятью и процессами.</p></div>
-<div class="card"><h3>Runtime</h3><p>.NET NativeAOT, Python runtime и JavaScript engine.</p></div>
-<div class="card"><h3>GUI Layer</h3><p>Desktop shell и оконный менеджер.</p></div>
-<div class="card"><h3>AI Layer</h3><p>LLM‑модуль для интеллектуальных функций.</p></div>
 </div>
-</section>
 
+<!-- DOWNLOAD -->
+<div class="page" id="download">
 <section>
-<h2>Preview</h2>
-<video controls>
-<source src="AI_OS.mp4" type="video/mp4">
-</video>
-</section>
-
-<section id="download">
 <h2>Download</h2>
-<div class="download">
-<a class="btn" href="#">Download ISO</a>
-<a class="btn" href="#github">Source Code</a>
-<a class="btn" href="#docs">Documentation</a>
+<p>Скачать AI_OS.</p>
+
+<div class="grid">
+<div class="card">
+<h3>ISO Image</h3>
+<a class="btn">Download ISO</a>
+</div>
+
+<div class="card">
+<h3>Source Code</h3>
+<a class="btn" onclick="openPage('github')">GitHub</a>
+</div>
+
+<div class="card">
+<h3>Documentation</h3>
+<a class="btn" onclick="openPage('docs')">Docs</a>
+</div>
 </div>
 </section>
+</div>
 
-<section id="docs">
+<!-- ARCHITECTURE -->
+<div class="page" id="architecture">
+<section>
+<h2>Interactive System Architecture</h2>
+<p>Нажмите на слой архитектуры чтобы увидеть описание.</p>
+
+<div class="arch">
+
+<div class="layer" onclick="showLayer('ai')">AI Layer</div>
+<div class="layer" onclick="showLayer('gui')">GUI Layer</div>
+<div class="layer" onclick="showLayer('runtime')">Runtime Layer</div>
+<div class="layer" onclick="showLayer('system')">System API</div>
+<div class="layer" onclick="showLayer('kernel')">Kernel</div>
+<div class="layer" onclick="showLayer('hardware')">Hardware</div>
+
+</div>
+
+<div class="arch-desc" id="archDesc">
+Выберите слой архитектуры.
+</div>
+
+</section>
+</div>
+
+<!-- DOCS -->
+<div class="page" id="docs">
+<section>
 <h2>Documentation</h2>
-<div class="grid">
-<div class="card">
-<h3>Getting Started</h3>
-<p>Как собрать и запустить AI_OS в эмуляторе.</p>
+<p>Документация AI_OS вдохновлена стилем документации ядра Linux и предназначена для разработчиков системного уровня.</p>
+
+<h3>1. Getting Started</h3>
+<p>Минимальные шаги для запуска AI_OS в эмуляторе.</p>
 <div class="code">
-git clone https://github.com/ai-os/ai-os
-cd ai-os
-make run
-</div>
-</div>
-<div class="card">
-<h3>Kernel Development</h3>
-<p>Документация по ядру: memory manager, scheduler, interrupts.</p>
-</div>
-<div class="card">
-<h3>Driver Development</h3>
-<p>Руководство по написанию драйверов устройств.</p>
-</div>
-<div class="card">
-<h3>AI Modules</h3>
-<p>Как создавать AI‑плагины и системные расширения.</p>
-</div>
-</div>
-</section>
+# clone repository
+ git clone https://github.com/ai-os/ai-os
 
-<section id="community">
+ cd ai-os
+
+ # build kernel
+ make kernel
+
+ # run in qemu
+ make run
+</div>
+
+<h3>2. System Requirements</h3>
+<div class="code">
+CPU: x86_64 or ARM64
+RAM: 2 GB minimum
+Disk: 4 GB
+Build tools: gcc, clang, make, qemu
+</div>
+
+<h3>3. Kernel Architecture</h3>
+<p>Ядро AI_OS использует microkernel архитектуру. Основные компоненты:</p>
+<div class="grid">
+<div class="card">
+<h3>Scheduler</h3>
+<p>Планировщик управляет потоками и распределяет CPU время между процессами.</p>
+</div>
+<div class="card">
+<h3>Memory Manager</h3>
+<p>Управляет виртуальной памятью, страницами и таблицами страниц.</p>
+</div>
+<div class="card">
+<h3>IPC</h3>
+<p>Механизм межпроцессного взаимодействия между сервисами системы.</p>
+</div>
+<div class="card">
+<h3>Drivers</h3>
+<p>Модульная система драйверов для устройств.</p>
+</div>
+</div>
+
+<h3>4. Kernel Directory Layout</h3>
+<div class="code">
+/kernel
+  /arch
+  /memory
+  /scheduler
+  /ipc
+  /drivers
+  /fs
+</div>
+
+<h3>5. Writing a Driver</h3>
+<p>Пример простого драйвера устройства.</p>
+<div class="code">
+#include <aios/driver.h>
+
+void init_driver(){
+    register_device("example_device");
+}
+</div>
+
+<h3>6. System Calls</h3>
+<p>Системные вызовы позволяют программам взаимодействовать с ядром.</p>
+<div class="code">
+int sys_write(int fd, const char* buffer, int size);
+int sys_read(int fd, char* buffer, int size);
+</div>
+
+<h3>7. File System</h3>
+<p>AI_OS поддерживает модульную файловую систему.</p>
+<div class="code">
+/
+ /bin
+ /system
+ /drivers
+ /users
+</div>
+
+<h3>8. Building Applications</h3>
+<p>Пример компиляции программы для AI_OS.</p>
+<div class="code">
+gcc hello.c -o hello
+</div>
+
+<h3>9. AI Modules</h3>
+<p>AI модули позволяют интегрировать машинное обучение в систему.</p>
+<div class="code">
+import aios
+
+ai = aios.load_model("assistant")
+ai.run()
+</div>
+
+<h3>10. Debugging</h3>
+<p>Для отладки используется последовательный вывод и QEMU debug.</p>
+<div class="code">
+make debug
+</div>
+
+</section>
+</div>
+
+<!-- COMMUNITY -->
+<div class="page" id="community">
+<section>
 <h2>Community</h2>
-<p>AI_OS открыт для разработчиков и энтузиастов системного программирования.</p>
 
 <div class="grid">
 <div class="card">
-<h3>Discussion</h3>
-<div class="community-links">
-<a href="#">Forum</a>
-<a href="#">Discord Server</a>
-<a href="#">Developer Chat</a>
+<h3>Forum</h3>
+<p>Обсуждение разработки.</p>
 </div>
+
+<div class="card">
+<h3>Discord</h3>
+<p>Чат разработчиков.</p>
 </div>
 
 <div class="card">
 <h3>Contribute</h3>
-<p>Вы можете участвовать в разработке ядра, драйверов, GUI или AI‑модулей.</p>
-</div>
-
-<div class="card">
-<h3>Bug Reports</h3>
-<p>Сообщайте об ошибках через GitHub Issues.</p>
+<p>Участвуйте в разработке ядра и модулей.</p>
 </div>
 
 </div>
+
 </section>
+</div>
 
-<section id="github">
-<h2>GitHub Integration</h2>
-<p>Основной репозиторий проекта:</p>
+<!-- GITHUB -->
+<div class="page" id="github">
+<section>
+<h2>GitHub</h2>
 
 <div class="card">
-<h3>AI_OS Repository</h3>
+<h3>Main Repository</h3>
 <div class="code">
 https://github.com/ai-os/ai-os
 </div>
-<p>Здесь размещены исходники ядра, загрузчика, GUI и AI‑модулей.</p>
 </div>
 
 <div class="grid">
 <div class="card">
 <h3>Issues</h3>
-<p>Отслеживание багов и предложений.</p>
+<p>Bug tracking</p>
 </div>
 
 <div class="card">
 <h3>Pull Requests</h3>
-<p>Контрибьюторы могут отправлять улучшения кода.</p>
+<p>Code contributions</p>
 </div>
 
 <div class="card">
-<h3>CI / Build</h3>
-<p>Автоматическая сборка ISO через GitHub Actions.</p>
+<h3>CI Build</h3>
+<p>Automated builds with GitHub Actions</p>
 </div>
+
 </div>
 
 </section>
+</div>
 
 <footer>
-<p>AI_OS Project — Artificial Intelligence Operating System</p>
+AI_OS Project — Artificial Intelligence Operating System
 </footer>
+
+<script>
+
+function openPage(id){
+
+const pages=document.querySelectorAll('.page')
+
+pages.forEach(p=>p.classList.remove('active'))
+
+document.getElementById(id).classList.add('active')
+
+window.scrollTo(0,0)
+
+}
+
+const archData={
+
+ai:"AI Layer: голосовой помощник, интеллектуальный поиск, автоматизация задач.",
+
+gui:"GUI Layer: рабочий стол, оконный менеджер и системный интерфейс.",
+
+runtime:"Runtime: .NET NativeAOT, Python runtime и JavaScript engine.",
+
+system:"System API: системные вызовы, IPC, файловая система и сеть.",
+
+kernel:"Kernel: управление памятью, планировщик процессов, драйверы устройств.",
+
+hardware:"Hardware: CPU, GPU, RAM, диски и периферия."
+
+}
+
+function showLayer(layer){
+
+const desc=document.getElementById("archDesc")
+
+const layers=document.querySelectorAll(".layer")
+
+layers.forEach(l=>l.classList.remove("active"))
+
+
+
+event.target.classList.add("active")
+
+
+desc.innerText=archData[layer]
+
+}
+
+</script>
 
 </body>
 </html>
