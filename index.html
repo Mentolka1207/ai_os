@@ -209,7 +209,7 @@ footer{
 
 <div class="card">
 <h3>ISO Image</h3>
-<a class="btn">Download ISO</a>
+<a class="btn" href="#" id="downloadISO">Download ISO</a>
 </div>
 
 <div class="card">
@@ -219,7 +219,7 @@ footer{
 
 <div class="card">
 <h3>Documentation</h3>
-<a class="btn" data-page="docs">Docs</a>
+<a class="btn" href="#" data-page="docs" class="nav-btn">Open Documentation</a>
 </div>
 
 </div>
@@ -261,7 +261,8 @@ footer{
 <!-- DOCS -->
 <div class="page" id="docs">
 <section>
-<h2>Documentation</h2>
+<h2 id="documentation">Documentation</h2>
+<p>Полная техническая документация AI_OS доступна прямо на этой странице сайта. Используйте разделы ниже для изучения ядра, драйверов и системных модулей.</p>
 
 <div class="code">git clone https://github.com/ai-os/ai-os
 cd ai-os
@@ -360,6 +361,7 @@ function openPage(id){
 
 nav.addEventListener("click",e=>{
  if(e.target.dataset.page){
+  e.preventDefault()
   openPage(e.target.dataset.page)
  }
 })
@@ -395,6 +397,16 @@ Object.keys(archData).forEach(name=>{
  archContainer.appendChild(el)
 
 })
+
+
+/* download simulation (avoids broken link if ISO not present) */
+const isoBtn=document.getElementById("downloadISO")
+if(isoBtn){
+ isoBtn.addEventListener("click",e=>{
+  e.preventDefault()
+  alert("ISO build is not available yet. It will appear in the Releases section once AI_OS builds are published.")
+ })
+}
 
 </script>
 
