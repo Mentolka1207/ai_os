@@ -19,6 +19,8 @@ section{max-width:1100px;margin:auto;padding:60px 20px}
 .btn{background:#00d4ff;color:black;padding:14px 22px;border-radius:6px;text-decoration:none;font-weight:bold}
 footer{text-align:center;padding:40px;border-top:1px solid #14223a;color:#6f8bbd}
 video{width:100%;border:1px solid #1c2c4a;border-radius:6px}
+.code{background:#0b1326;border:1px solid #223455;padding:16px;border-radius:6px;font-size:13px}
+.community-links a{display:block;margin:6px 0;color:#9cc3ff;text-decoration:none}
 </style>
 </head>
 <body>
@@ -28,8 +30,9 @@ video{width:100%;border:1px solid #1c2c4a;border-radius:6px}
 <a href="#features">Features</a>
 <a href="#architecture">Architecture</a>
 <a href="#download">Download</a>
-<a href="#roadmap">Roadmap</a>
-<a href="#developers">Developers</a>
+<a href="#docs">Docs</a>
+<a href="#community">Community</a>
+<a href="#github">GitHub</a>
 </nav>
 
 <header id="home">
@@ -39,25 +42,25 @@ video{width:100%;border:1px solid #1c2c4a;border-radius:6px}
 
 <section>
 <h2>About AI_OS</h2>
-<p>AI_OS — это экспериментальная операционная система нового поколения с встроенным искусственным интеллектом. Система объединяет ядро на C++, AI‑модули, современный GUI и поддержку x86_64 и ARM64.</p>
+<p>AI_OS — экспериментальная операционная система нового поколения с встроенным искусственным интеллектом. Система объединяет microkernel на C++, AI‑модули, современный GPU‑интерфейс и поддержку x86_64 и ARM64.</p>
 </section>
 
 <section id="features">
 <h2>Features</h2>
 <div class="grid">
-<div class="card"><h3>AI Assistant</h3><p>Встроенный AI помогает управлять системой, запускать программы и диагностировать ошибки.</p></div>
-<div class="card"><h3>Modern GUI</h3><p>GPU‑ускоренный интерфейс с поддержкой тем, анимаций и мультимониторных конфигураций.</p></div>
-<div class="card"><h3>Package Manager</h3><p>Система пакетов aipkg для установки и обновления приложений.</p></div>
-<div class="card"><h3>Secure System</h3><p>Sandbox‑механизмы, Secure Boot и изоляция приложений.</p></div>
+<div class="card"><h3>AI Assistant</h3><p>AI помогает управлять системой, запускать программы и диагностировать ошибки.</p></div>
+<div class="card"><h3>Modern GUI</h3><p>GPU‑ускоренный интерфейс с поддержкой тем и анимаций.</p></div>
+<div class="card"><h3>Package Manager</h3><p>aipkg — система пакетов для установки приложений.</p></div>
+<div class="card"><h3>Secure System</h3><p>Sandbox, Secure Boot и изоляция процессов.</p></div>
 </div>
 </section>
 
 <section id="architecture">
 <h2>System Architecture</h2>
 <div class="grid">
-<div class="card"><h3>Kernel</h3><p>C++ microkernel управляет памятью, процессами и драйверами.</p></div>
+<div class="card"><h3>Kernel</h3><p>C++ microkernel управляет памятью и процессами.</p></div>
 <div class="card"><h3>Runtime</h3><p>.NET NativeAOT, Python runtime и JavaScript engine.</p></div>
-<div class="card"><h3>GUI Layer</h3><p>Desktop shell, window manager и системные приложения.</p></div>
+<div class="card"><h3>GUI Layer</h3><p>Desktop shell и оконный менеджер.</p></div>
 <div class="card"><h3>AI Layer</h3><p>LLM‑модуль для интеллектуальных функций.</p></div>
 </div>
 </section>
@@ -73,29 +76,94 @@ video{width:100%;border:1px solid #1c2c4a;border-radius:6px}
 <h2>Download</h2>
 <div class="download">
 <a class="btn" href="#">Download ISO</a>
-<a class="btn" href="#">Source Code</a>
-<a class="btn" href="#">Documentation</a>
+<a class="btn" href="#github">Source Code</a>
+<a class="btn" href="#docs">Documentation</a>
 </div>
 </section>
 
-<section id="roadmap">
-<h2>Roadmap</h2>
+<section id="docs">
+<h2>Documentation</h2>
 <div class="grid">
-<div class="card"><h3>2025</h3><p>Bootloader и базовое ядро.</p></div>
-<div class="card"><h3>2026</h3><p>Файловая система и сетевой стек.</p></div>
-<div class="card"><h3>2027</h3><p>Alpha версия с GUI.</p></div>
-<div class="card"><h3>2028+</h3><p>AI‑функции и стабильная версия.</p></div>
+<div class="card">
+<h3>Getting Started</h3>
+<p>Как собрать и запустить AI_OS в эмуляторе.</p>
+<div class="code">
+git clone https://github.com/ai-os/ai-os
+cd ai-os
+make run
+</div>
+</div>
+<div class="card">
+<h3>Kernel Development</h3>
+<p>Документация по ядру: memory manager, scheduler, interrupts.</p>
+</div>
+<div class="card">
+<h3>Driver Development</h3>
+<p>Руководство по написанию драйверов устройств.</p>
+</div>
+<div class="card">
+<h3>AI Modules</h3>
+<p>Как создавать AI‑плагины и системные расширения.</p>
+</div>
 </div>
 </section>
 
-<section id="developers">
-<h2>Developers</h2>
-<p>AI_OS разрабатывается как экспериментальная платформа для разработчиков ОС, AI‑инженеров и системных программистов.</p>
+<section id="community">
+<h2>Community</h2>
+<p>AI_OS открыт для разработчиков и энтузиастов системного программирования.</p>
+
 <div class="grid">
-<div class="card"><h3>Languages</h3><p>C++, Assembly, C#, Python, JavaScript</p></div>
-<div class="card"><h3>Architecture</h3><p>x86_64 / ARM64</p></div>
-<div class="card"><h3>Tools</h3><p>LLVM, GCC, QEMU, Vulkan</p></div>
+<div class="card">
+<h3>Discussion</h3>
+<div class="community-links">
+<a href="#">Forum</a>
+<a href="#">Discord Server</a>
+<a href="#">Developer Chat</a>
 </div>
+</div>
+
+<div class="card">
+<h3>Contribute</h3>
+<p>Вы можете участвовать в разработке ядра, драйверов, GUI или AI‑модулей.</p>
+</div>
+
+<div class="card">
+<h3>Bug Reports</h3>
+<p>Сообщайте об ошибках через GitHub Issues.</p>
+</div>
+
+</div>
+</section>
+
+<section id="github">
+<h2>GitHub Integration</h2>
+<p>Основной репозиторий проекта:</p>
+
+<div class="card">
+<h3>AI_OS Repository</h3>
+<div class="code">
+https://github.com/ai-os/ai-os
+</div>
+<p>Здесь размещены исходники ядра, загрузчика, GUI и AI‑модулей.</p>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>Issues</h3>
+<p>Отслеживание багов и предложений.</p>
+</div>
+
+<div class="card">
+<h3>Pull Requests</h3>
+<p>Контрибьюторы могут отправлять улучшения кода.</p>
+</div>
+
+<div class="card">
+<h3>CI / Build</h3>
+<p>Автоматическая сборка ISO через GitHub Actions.</p>
+</div>
+</div>
+
 </section>
 
 <footer>
