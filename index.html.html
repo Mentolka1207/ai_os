@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI_OS 
+<section class="panel">
+<h2>AI_OS Preview</h2>
+
+<video controls width="100%">
+  <source src="video/AI_OS.mp4" type="video/mp4">
+</video>
+
+</section> — Project Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #03050a;
+    --bg2: #080d18;
+    --panel: #0b1220;
+    --border: #0f2a4a;
+    --accent1: #00d4ff;
+    --accent2: #7b2fff;
+    --accent3: #00ff9d;
+    --accent4: #ff6b35;
+    --accent5: #ffd93d;
+    --text: #c8daf0;
+    --text-dim: #4a6080;
+    --glow1: 0 0 20px rgba(0,212,255,0.3);
+    --glow2: 0 0 20px rgba(123,47,255,0.3);
+    --glow3: 0 0 20px rgba(0,255,157,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  .hero {
+    text-align: center;
+    padding: 60px 0 50px;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--accent1);
+    color: var(--accent1);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    padding: 4px 16px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    animation: pulse-border 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { box-shadow: 0 0 0 rgba(0,212,255,0.4); }
+    50% { box-shadow: 0 0 16px rgba(0,212,255,0.4); }
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    background: linear-gradient(135deg, #00d4ff 0%, #7b2fff 50%, #00ff9d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 40px rgba(0,212,255,0.4));
+    animation: title-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes title-glow {
+    0%, 100% { filter: drop-shadow(0 0 30px rgba(0,212,255,0.3)); }
+    50% { filter: drop-shadow(0 0 60px rgba(0,212,255,0.6)); }
+  }
+
+  .hero-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: var(--text-dim);
+    letter-spacing: 6px;
+    margin-top: 12px;
+    text-transform: uppercase;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    font-size: 12px;
+    color: var(--text);
+  }
+
+  .meta-chip .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    color: var(--accent1);
+    letter-spacing: 2px;
+    opacity: 0.6;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent1);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* PANEL */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent1), transparent);
+    opacity: 0.6;
+  }
+
+  /* TECH STACK */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .lang-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .lang-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .lang-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .lang-cpp::after { background: var(--accent1); box-shadow: var(--glow1); }
+  .lang-cs::after  { background: var(--accent2); box-shadow: var(--glow2); }
+  .lang-py::after  { background: var(--accent5); }
+  .lang-js::after  { background: #f7df1e; }
+  .lang-asm::after { background: var(--accent3); box-shadow: var(--glow3); }
+
+  .lang-icon {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+
+  .lang-cpp .lang-icon  { color: var(--accent1); }
+  .lang-cs .lang-icon   { color: var(--accent2); }
+  .lang-py .lang-icon   { color: var(--accent5); }
+  .lang-js .lang-icon   { color: #f7df1e; }
+  .lang-asm .lang-icon  { color: var(--accent3); }
+
+  .lang-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: white;
+  }
+
+  .lang-role {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .lang-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    margin: 4px 2px 0 0;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ARCHITECTURE */
+  .arch-layers {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .arch-layer {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    position: relative;
+  }
+
+  .arch-layer:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .arch-label {
+    width: 180px;
+    min-width: 180px;
+    padding: 14px 16px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .arch-content {
+    flex: 1;
+    padding: 14px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .arch-chip {
+    font-size: 11px;
+    padding: 4px 12px;
+    border: 1px solid;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .layer-hw    { background: rgba(255,107,53,0.05); }
+  .layer-hw    .arch-label { color: var(--accent4); }
+  .layer-hw    .arch-chip  { border-color: var(--accent4); color: var(--accent4); background: rgba(255,107,53,0.1); }
+
+  .layer-kern  { background: rgba(0,212,255,0.05); }
+  .layer-kern  .arch-label { color: var(--accent1); }
+  .layer-kern  .arch-chip  { border-color: var(--accent1); color: var(--accent1); background: rgba(0,212,255,0.1); }
+
+  .layer-sys   { background: rgba(123,47,255,0.05); }
+  .layer-sys   .arch-label { color: var(--accent2); }
+  .layer-sys   .arch-chip  { border-color: var(--accent2); color: var(--accent2); background: rgba(123,47,255,0.1); }
+
+  .layer-rt    { background: rgba(0,255,157,0.05); }
+  .layer-rt    .arch-label { color: var(--accent3); }
+  .layer-rt    .arch-chip  { border-color: var(--accent3); color: var(--accent3); background: rgba(0,255,157,0.1); }
+
+  .layer-gui   { background: rgba(255,217,61,0.05); }
+  .layer-gui   .arch-label { color: var(--accent5); }
+  .layer-gui   .arch-chip  { border-color: var(--accent5); color: var(--accent5); background: rgba(255,217,61,0.1); }
+
+  .layer-ai    { background: rgba(0,212,255,0.08); }
+  .layer-ai    .arch-label { color: white; font-weight: bold; }
+  .layer-ai    .arch-chip  { border-color: white; color: white; background: rgba(255,255,255,0.08); }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent1), var(--accent2), var(--accent3));
+    opacity: 0.4;
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .tl-dot {
+    position: absolute;
+    left: -34px;
+    top: 4px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tl-dot::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .tl-phase-prep   .tl-dot { border-color: var(--text-dim); color: var(--text-dim); }
+  .tl-phase-alpha  .tl-dot { border-color: var(--accent4); color: var(--accent4); }
+  .tl-phase-beta   .tl-dot { border-color: var(--accent2); color: var(--accent2); }
+  .tl-phase-rc     .tl-dot { border-color: var(--accent1); color: var(--accent1); animation: pulse-dot 1.5s ease-in-out infinite; }
+  .tl-phase-rel    .tl-dot { border-color: var(--accent3); color: var(--accent3); animation: pulse-dot 1s ease-in-out infinite; }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+    50% { box-shadow: 0 0 0 6px transparent; }
+  }
+
+  .tl-date {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .tl-phase-prep  .tl-date { color: var(--text-dim); }
+  .tl-phase-alpha .tl-date { color: var(--accent4); }
+  .tl-phase-beta  .tl-date { color: var(--accent2); }
+  .tl-phase-rc    .tl-date { color: var(--accent1); }
+  .tl-phase-rel   .tl-date { color: var(--accent3); }
+
+  .tl-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .tl-items {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .tl-items li {
+    font-size: 11px;
+    padding: 3px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--text-dim);
+  }
+
+  .tl-items li::before {
+    content: '▸ ';
+    opacity: 0.4;
+  }
+
+  .tl-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  /* MODULES */
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .module-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 18px;
+  }
+
+  .module-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .module-icon {
+    width: 32px; height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .module-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .module-lang {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    margin-left: auto;
+  }
+
+  .ml-cpp  { background: rgba(0,212,255,0.15); color: var(--accent1); border: 1px solid rgba(0,212,255,0.3); }
+  .ml-cs   { background: rgba(123,47,255,0.15); color: var(--accent2); border: 1px solid rgba(123,47,255,0.3); }
+  .ml-py   { background: rgba(255,217,61,0.15); color: var(--accent5); border: 1px solid rgba(255,217,61,0.3); }
+  .ml-js   { background: rgba(247,223,30,0.15); color: #f7df1e; border: 1px solid rgba(247,223,30,0.3); }
+  .ml-asm  { background: rgba(0,255,157,0.15); color: var(--accent3); border: 1px solid rgba(0,255,157,0.3); }
+  .ml-mix  { background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.15); }
+
+  .module-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* TARGETS */
+  .targets-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .target-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .target-arch {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 8px;
+  }
+
+  .t-x86 .target-arch { color: var(--accent1); text-shadow: var(--glow1); }
+  .t-arm .target-arch { color: var(--accent3); text-shadow: var(--glow3); }
+
+  .target-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .target-chip {
+    font-size: 10px;
+    padding: 3px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-dim);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #00d4ff, #7b2fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .footer-text {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0;
+  }
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  .divider-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* STATUS BAR */
+  .statusbar {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .sb-item {
+    font-size: 11px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .sb-item .val {
+    color: var(--accent1);
+  }
+
+  @media (max-width: 600px) {
+    .targets-grid { grid-template-columns: 1fr; }
+    .arch-label { width: 120px; min-width: 120px; font-size: 10px; }
+    .hero h1 { font-size: 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">// PROJECT SPECIFICATION v1.0</div>
+    <h1>AI_OS</h1>
+    <div class="hero-sub">Artificial Intelligence Operating System</div>
+    <div class="hero-meta">
+      <div class="meta-chip"><span class="dot" style="background:#00ff9d"></span> STATUS: PRE-DEVELOPMENT</div>
+      <div class="meta-chip"><span class="dot" style="background:#00d4ff"></span> TARGET: 2030 RELEASE</div>
+      <div class="meta-chip"><span class="dot" style="background:#7b2fff"></span> ARCH: x86_64 + ARM64</div>
+      <div class="meta-chip"><span class="dot" style="background:#ff6b35"></span> GUI: NATIVE</div>
+    </div>
+  </div>
+
+  <!-- STATUS BAR -->
+  <div class="statusbar">
+    <div class="sb-item">PROJECT <span class="val">AI_OS</span></div>
+    <div class="sb-item">PHASE <span class="val">PLANNING</span></div>
+    <div class="sb-item">LANG <span class="val">5</span></div>
+    <div class="sb-item">MODULES <span class="val">14</span></div>
+    <div class="sb-item">TIMELINE <span class="val">2025–2030</span></div>
+    <div class="sb-item">LICENSE <span class="val">PROPRIETARY</span></div>
+  </div>
+
+  <!-- TECH STACK -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Технологический стек</span>
+    </div>
+    <div class="stack-grid">
+
+      <div class="lang-card lang-cpp">
+        <div class="lang-icon">C++</div>
+        <div class="lang-name">C++ 23</div>
+        <div class="lang-role">Ядро ОС, драйверы устройств, файловая система, менеджер памяти, планировщик процессов</div>
+        <div style="margin-top:10px">
+          <span class="lang-tag">Kernel</span>
+          <span class="lang-tag">Drivers</span>
+          <span class="lang-tag">Memory</span>
+          <span class="lang-tag">FS</span>
+        </div>
+      </div>
+
+      <div class="lang-card lang-asm">
+        <div class="lang-icon">ASM</div>
+        <div class="lang-name">x86-64 Assembly</div>
+        <div class="lang-role">Загрузчик (bootloader), прерывания, системные вызовы низкого уровня, инициализация CPU</div>
+        <div style="margin-top:10px">
+          <span class="lang-tag">Bootloader</span>
+          <span class="lang-tag">ISR</span>
+          <span class="lang-tag">Syscalls</span>
+        </div>
+      </div>
+
+      <div class="lang-card lang-cs">
+        <div class="lang-icon">C#</div>
+        <div class="lang-name">C# 13 / .NET NativeAOT</div>
+        <div class="lang-role">Графический интерфейс (GUI), системные приложения, оконный менеджер, управление пользователями</div>
+        <div style="margin-top:10px">
+          <span class="lang-tag">GUI</span>
+          <span class="lang-tag">WM</span>
+          <span class="lang-tag">Apps</span>
+          <span class="lang-tag">NativeAOT</span>
+        </div>
+      </div>
+
+      <div class="lang-card lang-py">
+        <div class="lang-icon">PY</div>
+        <div class="lang-name">Python 3.13</div>
+        <div class="lang-role">AI-модуль ОС, пакетный менеджер, скрипты автоматизации, системные утилиты</div>
+        <div style="margin-top:10px">
+          <span class="lang-tag">AI Engine</span>
+          <span class="lang-tag">Package Mgr</span>
+          <span class="lang-tag">Utils</span>
+        </div>
+      </div>
+
+      <div class="lang-card lang-js">
+        <div class="lang-icon">JS</div>
+        <div class="lang-name">JavaScript / V8</div>
+        <div class="lang-role">Встроенный браузер, веб-приложения, системный UI через WebKit/Chromium Embedded</div>
+        <div style="margin-top:10px">
+          <span class="lang-tag">Browser</span>
+          <span class="lang-tag">WebApps</span>
+          <span class="lang-tag">CEF</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Архитектура системы</span>
+    </div>
+    <div class="panel">
+      <div class="arch-layers">
+
+        <div class="arch-layer layer-ai">
+          <div class="arch-label">🤖 AI LAYER</div>
+          <div class="arch-content">
+            <span class="arch-chip">AI Shell</span>
+            <span class="arch-chip">Голосовой ввод</span>
+            <span class="arch-chip">Автодополнение задач</span>
+            <span class="arch-chip">AI Диагностика</span>
+            <span class="arch-chip">Умный поиск</span>
+          </div>
+        </div>
+
+        <div class="arch-layer layer-gui">
+          <div class="arch-label">🖥 GUI LAYER</div>
+          <div class="arch-content">
+            <span class="arch-chip">Оконный менеджер</span>
+            <span class="arch-chip">Compositor (GPU)</span>
+            <span class="arch-chip">Темы / Скины</span>
+            <span class="arch-chip">Taskbar</span>
+            <span class="arch-chip">Настройки</span>
+            <span class="arch-chip">App Store</span>
+          </div>
+        </div>
+
+        <div class="arch-layer layer-rt">
+          <div class="arch-label">📦 RUNTIME</div>
+          <div class="arch-content">
+            <span class="arch-chip">.NET NativeAOT</span>
+            <span class="arch-chip">Python Runtime</span>
+            <span class="arch-chip">V8 Engine</span>
+            <span class="arch-chip">POSIX API</span>
+            <span class="arch-chip">libc (custom)</span>
+          </div>
+        </div>
+
+        <div class="arch-layer layer-sys">
+          <div class="arch-label">⚙️ SYSTEM API</div>
+          <div class="arch-content">
+            <span class="arch-chip">Syscall Interface</span>
+            <span class="arch-chip">IPC / Sockets</span>
+            <span class="arch-chip">VFS</span>
+            <span class="arch-chip">Network Stack (TCP/IP)</span>
+            <span class="arch-chip">Security Module</span>
+          </div>
+        </div>
+
+        <div class="arch-layer layer-kern">
+          <div class="arch-label">🔧 KERNEL</div>
+          <div class="arch-content">
+            <span class="arch-chip">Micro-Kernel (C++)</span>
+            <span class="arch-chip">Memory Manager</span>
+            <span class="arch-chip">Process Scheduler</span>
+            <span class="arch-chip">Interrupt Handler</span>
+            <span class="arch-chip">Device Drivers</span>
+            <span class="arch-chip">GPU Driver</span>
+          </div>
+        </div>
+
+        <div class="arch-layer layer-hw">
+          <div class="arch-label">💾 HARDWARE</div>
+          <div class="arch-content">
+            <span class="arch-chip">x86-64 CPU</span>
+            <span class="arch-chip">ARM64 CPU</span>
+            <span class="arch-chip">RAM / NVMe</span>
+            <span class="arch-chip">GPU (Vulkan)</span>
+            <span class="arch-chip">USB / PCIe</span>
+            <span class="arch-chip">UEFI / BIOS</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TARGET PLATFORMS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Целевые платформы</span>
+    </div>
+    <div class="targets-grid">
+      <div class="target-card t-x86">
+        <div class="target-arch">x86_64</div>
+        <div style="font-size:11px;color:var(--text-dim)">Intel / AMD ПК и ноутбуки</div>
+        <div class="target-chips">
+          <span class="target-chip">Intel Core (12-14 gen)</span>
+          <span class="target-chip">AMD Ryzen 5000+</span>
+          <span class="target-chip">Desktop / Laptop</span>
+          <span class="target-chip">UEFI Secure Boot</span>
+          <span class="target-chip">Vulkan 1.3+</span>
+          <span class="target-chip">DDR4 / DDR5</span>
+        </div>
+      </div>
+      <div class="target-card t-arm">
+        <div class="target-arch">ARM64</div>
+        <div style="font-size:11px;color:var(--text-dim)">Apple Silicon / Snapdragon</div>
+        <div class="target-chips">
+          <span class="target-chip">Apple M1/M2/M3</span>
+          <span class="target-chip">Snapdragon X Elite</span>
+          <span class="target-chip">Raspberry Pi 5</span>
+          <span class="target-chip">AArch64</span>
+          <span class="target-chip">Metal / Vulkan</span>
+          <span class="target-chip">LPDDR5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULES -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Модули системы</span>
+    </div>
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">💾</div>
+          <div class="module-name">Bootloader</div>
+          <span class="module-lang ml-asm">ASM</span>
+        </div>
+        <div class="module-desc">UEFI-загрузчик на x86-64 ASM. Инициализация CPU, GDT, переход в 64-bit режим, загрузка ядра.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🔧</div>
+          <div class="module-name">Micro-Kernel</div>
+          <span class="module-lang ml-cpp">C++</span>
+        </div>
+        <div class="module-desc">Минималистичное ядро: управление памятью (VMM/PMM), планировщик, системные вызовы.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🖥️</div>
+          <div class="module-name">GPU / Display</div>
+          <span class="module-lang ml-cpp">C++</span>
+        </div>
+        <div class="module-desc">Драйвер GPU с поддержкой Vulkan. Framebuffer, KMS/DRM-аналог для AI_OS.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">📁</div>
+          <div class="module-name">Файловая система</div>
+          <span class="module-lang ml-cpp">C++</span>
+        </div>
+        <div class="module-desc">Собственная ФС AIFS (AI File System) с журналированием. Совместимость с ext4, FAT32, NTFS (чтение).</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🌐</div>
+          <div class="module-name">Network Stack</div>
+          <span class="module-lang ml-cpp">C++</span>
+        </div>
+        <div class="module-desc">TCP/IP v4/v6, WiFi, Ethernet. HTTP/HTTPS клиент встроен в ядро системы.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🎨</div>
+          <div class="module-name">Window Manager</div>
+          <span class="module-lang ml-cs">C#</span>
+        </div>
+        <div class="module-desc">.NET NativeAOT оконный менеджер с GPU-compositing. Темы, анимации, мультимонитор.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🖱️</div>
+          <div class="module-name">Desktop Shell</div>
+          <span class="module-lang ml-cs">C#</span>
+        </div>
+        <div class="module-desc">Рабочий стол, панель задач, трей, уведомления, меню приложений.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">⚙️</div>
+          <div class="module-name">System Settings</div>
+          <span class="module-lang ml-cs">C#</span>
+        </div>
+        <div class="module-desc">Панель управления: сеть, дисплей, пользователи, безопасность, обновления.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🤖</div>
+          <div class="module-name">AI Core Engine</div>
+          <span class="module-lang ml-py">Python</span>
+        </div>
+        <div class="module-desc">Встроенная LLM-модель (локальная). AI-ассистент, умный поиск, автодополнение команд, голосовой ввод.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">📦</div>
+          <div class="module-name">Package Manager</div>
+          <span class="module-lang ml-py">Python</span>
+        </div>
+        <div class="module-desc">aipkg — менеджер пакетов AI_OS. Репозиторий, зависимости, обновления, sandboxing.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🔒</div>
+          <div class="module-name">Security Module</div>
+          <span class="module-lang ml-mix">C++ + ASM</span>
+        </div>
+        <div class="module-desc">ASLR, Secure Boot, sandbox-изоляция, шифрование диска, управление правами.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🌍</div>
+          <div class="module-name">Browser Engine</div>
+          <span class="module-lang ml-js">JS</span>
+        </div>
+        <div class="module-desc">Встроенный браузер на базе Chromium Embedded Framework + V8. Полная поддержка HTML5/CSS3/JS.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">💻</div>
+          <div class="module-name">Terminal + Shell</div>
+          <span class="module-lang ml-mix">C++ + Python</span>
+        </div>
+        <div class="module-desc">AI-powered терминал. Автодополнение через LLM, объяснение команд, история с поиском.</div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <div class="module-icon">🔄</div>
+          <div class="module-name">Update System</div>
+          <span class="module-lang ml-py">Python</span>
+        </div>
+        <div class="module-desc">Дельта-обновления ОС. A/B-разделы для безотказного обновления. Откат при ошибке.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <span class="section-title">Дорожная карта до 2030</span>
+    </div>
+    <div class="panel">
+      <div class="timeline">
+
+        <div class="tl-item tl-phase-prep">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2025 Q1–Q2 · ПОДГОТОВКА</div>
+          <div class="tl-title">Проектирование и прототипирование</div>
+          <div class="tl-desc">Документация, архитектурные решения, инструментарий разработки</div>
+          <ul class="tl-items">
+            <li>Техническая спецификация</li>
+            <li>Выбор тулчейна (GCC/Clang cross-compile)</li>
+            <li>Настройка QEMU/VMware окружения</li>
+            <li>Репозиторий и CI/CD pipeline</li>
+            <li>Базовый UEFI Bootloader (ASM)</li>
+          </ul>
+        </div>
+
+        <div class="tl-item tl-phase-prep">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2025 Q3–Q4 · ЯДРО</div>
+          <div class="tl-title">Разработка ядра v0.1</div>
+          <div class="tl-desc">Минимальное загружаемое ядро с базовыми возможностями</div>
+          <ul class="tl-items">
+            <li>PMM / VMM (физ. и вирт. память)</li>
+            <li>Планировщик процессов</li>
+            <li>Драйвер VGA / Framebuffer</li>
+            <li>Базовый ввод-вывод (PS/2, USB HID)</li>
+            <li>Загрузка в QEMU + VMware</li>
+          </ul>
+        </div>
+
+        <div class="tl-item tl-phase-prep">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2026 Q1–Q2 · СИСТЕМА</div>
+          <div class="tl-title">Системный уровень</div>
+          <div class="tl-desc">Файловая система, сеть, драйверы</div>
+          <ul class="tl-items">
+            <li>AIFS файловая система</li>
+            <li>NVMe / SATA драйвер</li>
+            <li>TCP/IP сетевой стек</li>
+            <li>Syscall интерфейс</li>
+            <li>Базовый терминал</li>
+          </ul>
+        </div>
+
+        <div class="tl-item tl-phase-alpha">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2026 Q3 – 2027 Q2 · ALPHA</div>
+          <div class="tl-title">🔥 AI_OS Alpha</div>
+          <div class="tl-desc">Первая публичная версия для разработчиков. Нестабильная, для тестирования концепций.</div>
+          <ul class="tl-items">
+            <li>Графический сервер (GPU + Vulkan)</li>
+            <li>Базовый Window Manager (C#)</li>
+            <li>Рабочий стол v1</li>
+            <li>Файловый менеджер</li>
+            <li>Python Runtime встроен</li>
+            <li>AI-ассистент (прототип)</li>
+            <li>Браузер (CEF базовый)</li>
+            <li>Alpha ISO образ</li>
+          </ul>
+        </div>
+
+        <div class="tl-item tl-phase-beta">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2027 Q3 – 2028 Q4 · BETA</div>
+          <div class="tl-title">🟣 AI_OS Beta</div>
+          <div class="tl-desc">Публичная бета для широкого тестирования. Основной функционал стабилен.</div>
+          <ul class="tl-items">
+            <li>Полный GUI (темы, анимации)</li>
+            <li>AI Core с локальной LLM</li>
+            <li>Голосовое управление</li>
+            <li>App Store + aipkg</li>
+            <li>ARM64 порт</li>
+            <li>Поддержка Wi-Fi / BT</li>
+            <li>Менеджер обновлений</li>
+            <li>Система безопасности</li>
+            <li>Developer SDK</li>
+          </ul>
+        </div>
+
+        <div class="tl-item tl-phase-rc">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2029 Q1–Q3 · RELEASE CANDIDATE</div>
+          <div class="tl-title">🔵 AI_OS RC1 / RC2</div>
+          <div class="tl-desc">Финальное тестирование, исправление багов, оптимизация производительности</div>
+          <ul class="tl-items">
+            <li>Стабилизация всех компонентов</li>
+            <li>Аппаратная совместимость HCL</li>
+            <li>Нагрузочное тестирование</li>
+            <li>Документация пользователя</li>
+            <li>OEM-соглашения</li>
+          </ul>
+        </div>
+
+        <div class="tl-item tl-phase-rel">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2029 Q4 – 2030 Q1 · RELEASE 🎉</div>
+          <div class="tl-title">✅ AI_OS v1.0 STABLE</div>
+          <div class="tl-desc">Официальный релиз операционной системы AI_OS</div>
+          <ul class="tl-items">
+            <li>x86_64 + ARM64 ISO</li>
+            <li>Установщик с GUI</li>
+            <li>Dual-boot поддержка</li>
+            <li>Обновление с Windows/Linux</li>
+            <li>Публичный репозиторий пакетов</li>
+            <li>Официальный сайт</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MINIMUM REQUIREMENTS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <span class="section-title">Минимальные требования</span>
+    </div>
+    <div class="panel">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px">
+        <div>
+          <div style="color:var(--accent1);font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;margin-bottom:10px">МИНИМУМ</div>
+          <div style="font-size:12px;color:var(--text-dim);line-height:2">
+            CPU: 2 ядра, 2 GHz<br>
+            RAM: 2 GB<br>
+            Диск: 16 GB<br>
+            GPU: OpenGL 3.3 / Vulkan<br>
+            UEFI: 64-bit
+          </div>
+        </div>
+        <div>
+          <div style="color:var(--accent3);font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;margin-bottom:10px">РЕКОМЕНДУЕТСЯ</div>
+          <div style="font-size:12px;color:var(--text-dim);line-height:2">
+            CPU: 4+ ядер, 3 GHz<br>
+            RAM: 8 GB<br>
+            Диск: 64 GB NVMe SSD<br>
+            GPU: Vulkan 1.3+<br>
+            Network: Wi-Fi / Ethernet
+          </div>
+        </div>
+        <div>
+          <div style="color:var(--accent5);font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;margin-bottom:10px">ДЛЯ AI-ФУНКЦИЙ</div>
+          <div style="font-size:12px;color:var(--text-dim);line-height:2">
+            CPU: 8+ ядер<br>
+            RAM: 16 GB+<br>
+            GPU: 8 GB VRAM (LLM)<br>
+            Диск: 128 GB+<br>
+            NPU (опц.): любой
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-logo">AI_OS</div>
+    <div class="footer-text">// ARTIFICIAL INTELLIGENCE OPERATING SYSTEM · PROJECT PLAN · 2025–2030</div>
+    <div style="margin-top:16px;font-size:11px;color:var(--text-dim);font-family:'Share Tech Mono',monospace">
+      C++ · Assembly · C# · Python · JavaScript
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
