@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI_OS — Artificial Intelligence Operating System</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#05070f;color:#cfe3ff;font-family:'JetBrains Mono',monospace}
+header{padding:80px 20px;text-align:center;background:linear-gradient(180deg,#070b18,#05070f)}
+h1{font-family:Orbitron;font-size:64px;margin:0;background:linear-gradient(90deg,#00d4ff,#7b2fff,#00ffa6);-webkit-background-clip:text;color:transparent}
+nav{position:sticky;top:0;background:#070b18;border-bottom:1px solid #14223a;display:flex;justify-content:center;gap:30px;padding:14px;z-index:5}
+nav a{color:#8fb3ff;text-decoration:none;font-size:14px}
+section{max-width:1100px;margin:auto;padding:60px 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#0b1326;border:1px solid #1d2b47;padding:20px;border-radius:6px}
+.card h3{margin-top:0;font-family:Orbitron}
+.download{display:flex;gap:20px;flex-wrap:wrap}
+.btn{background:#00d4ff;color:black;padding:14px 22px;border-radius:6px;text-decoration:none;font-weight:bold}
+footer{text-align:center;padding:40px;border-top:1px solid #14223a;color:#6f8bbd}
+video{width:100%;border:1px solid #1c2c4a;border-radius:6px}
+</style>
+</head>
+<body>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#features">Features</a>
+<a href="#architecture">Architecture</a>
+<a href="#download">Download</a>
+<a href="#roadmap">Roadmap</a>
+<a href="#developers">Developers</a>
+</nav>
+
+<header id="home">
+<h1>AI_OS</h1>
+<p>Artificial Intelligence Operating System</p>
+</header>
+
+<section>
+<h2>About AI_OS</h2>
+<p>AI_OS — это экспериментальная операционная система нового поколения с встроенным искусственным интеллектом. Система объединяет ядро на C++, AI‑модули, современный GUI и поддержку x86_64 и ARM64.</p>
+</section>
+
+<section id="features">
+<h2>Features</h2>
+<div class="grid">
+<div class="card"><h3>AI Assistant</h3><p>Встроенный AI помогает управлять системой, запускать программы и диагностировать ошибки.</p></div>
+<div class="card"><h3>Modern GUI</h3><p>GPU‑ускоренный интерфейс с поддержкой тем, анимаций и мультимониторных конфигураций.</p></div>
+<div class="card"><h3>Package Manager</h3><p>Система пакетов aipkg для установки и обновления приложений.</p></div>
+<div class="card"><h3>Secure System</h3><p>Sandbox‑механизмы, Secure Boot и изоляция приложений.</p></div>
+</div>
+</section>
+
+<section id="architecture">
+<h2>System Architecture</h2>
+<div class="grid">
+<div class="card"><h3>Kernel</h3><p>C++ microkernel управляет памятью, процессами и драйверами.</p></div>
+<div class="card"><h3>Runtime</h3><p>.NET NativeAOT, Python runtime и JavaScript engine.</p></div>
+<div class="card"><h3>GUI Layer</h3><p>Desktop shell, window manager и системные приложения.</p></div>
+<div class="card"><h3>AI Layer</h3><p>LLM‑модуль для интеллектуальных функций.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Preview</h2>
+<video controls>
+<source src="AI_OS.mp4" type="video/mp4">
+</video>
+</section>
+
+<section id="download">
+<h2>Download</h2>
+<div class="download">
+<a class="btn" href="#">Download ISO</a>
+<a class="btn" href="#">Source Code</a>
+<a class="btn" href="#">Documentation</a>
+</div>
+</section>
+
+<section id="roadmap">
+<h2>Roadmap</h2>
+<div class="grid">
+<div class="card"><h3>2025</h3><p>Bootloader и базовое ядро.</p></div>
+<div class="card"><h3>2026</h3><p>Файловая система и сетевой стек.</p></div>
+<div class="card"><h3>2027</h3><p>Alpha версия с GUI.</p></div>
+<div class="card"><h3>2028+</h3><p>AI‑функции и стабильная версия.</p></div>
+</div>
+</section>
+
+<section id="developers">
+<h2>Developers</h2>
+<p>AI_OS разрабатывается как экспериментальная платформа для разработчиков ОС, AI‑инженеров и системных программистов.</p>
+<div class="grid">
+<div class="card"><h3>Languages</h3><p>C++, Assembly, C#, Python, JavaScript</p></div>
+<div class="card"><h3>Architecture</h3><p>x86_64 / ARM64</p></div>
+<div class="card"><h3>Tools</h3><p>LLVM, GCC, QEMU, Vulkan</p></div>
+</div>
+</section>
+
+<footer>
+<p>AI_OS Project — Artificial Intelligence Operating System</p>
+</footer>
+
+</body>
+</html>
