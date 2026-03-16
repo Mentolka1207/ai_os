@@ -1,86 +1,170 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI_OS — Artificial Intelligence Operating System</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
-<style>
-body{margin:0;background:#05070f;color:#cfe3ff;font-family:'JetBrains Mono',monospace}
 
-nav{position:sticky;top:0;background:#070b18;border-bottom:1px solid #14223a;display:flex;justify-content:center;gap:30px;padding:14px;z-index:5}
-nav a{color:#8fb3ff;text-decoration:none;font-size:14px}
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+ --bg:#05070f;
+ --panel:#0b1326;
+ --border:#1c2c4a;
+ --accent:#00d4ff;
+ --text:#cfe3ff;
+ --muted:#8fb3ff;
+}
+
+*{box-sizing:border-box}
+
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:'JetBrains Mono', monospace;
+}
+
+h1,h2,h3{font-family:Orbitron}
+
+nav{
+ position:sticky;
+ top:0;
+ background:#070b18;
+ border-bottom:1px solid var(--border);
+ display:flex;
+ justify-content:center;
+ gap:30px;
+ padding:14px;
+ z-index:10;
+}
+
+nav a{
+ color:var(--muted);
+ text-decoration:none;
+ font-size:14px;
+ cursor:pointer;
+}
+
+nav a:hover{color:white}
 
 .page{display:none}
 .page.active{display:block}
 
-header{padding:80px 20px;text-align:center;background:linear-gradient(180deg,#070b18,#05070f)}
-h1{font-family:Orbitron;font-size:64px;margin:0;background:linear-gradient(90deg,#00d4ff,#7b2fff,#00ffa6);-webkit-background-clip:text;color:transparent}
+header{
+ padding:80px 20px;
+ text-align:center;
+ background:linear-gradient(180deg,#070b18,#05070f);
+}
 
-section{max-width:1100px;margin:auto;padding:60px 20px}
+h1{
+ font-size:64px;
+ margin:0;
+ background:linear-gradient(90deg,#00d4ff,#7b2fff,#00ffa6);
+ -webkit-background-clip:text;
+ color:transparent;
+}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+section{
+ max-width:1100px;
+ margin:auto;
+ padding:60px 20px;
+}
 
-.card{background:#0b1326;border:1px solid #1d2b47;padding:20px;border-radius:6px}
-.card h3{margin-top:0;font-family:Orbitron}
+.grid{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+ gap:20px;
+}
 
-.btn{background:#00d4ff;color:black;padding:14px 22px;border-radius:6px;text-decoration:none;font-weight:bold;display:inline-block}
+.card{
+ background:var(--panel);
+ border:1px solid var(--border);
+ padding:20px;
+ border-radius:6px;
+}
 
-footer{text-align:center;padding:40px;border-top:1px solid #14223a;color:#6f8bbd}
+.btn{
+ display:inline-block;
+ background:var(--accent);
+ color:black;
+ padding:12px 20px;
+ border-radius:6px;
+ text-decoration:none;
+ font-weight:600;
+}
 
-video{width:100%;border:1px solid #1c2c4a;border-radius:6px}
+.btn:hover{opacity:.85}
 
-/* architecture diagram */
+.code{
+ background:#0a1220;
+ border:1px solid var(--border);
+ padding:16px;
+ border-radius:6px;
+ font-size:13px;
+ white-space:pre-wrap;
+}
+
+footer{
+ text-align:center;
+ padding:40px;
+ border-top:1px solid var(--border);
+ color:#6f8bbd;
+}
+
+/* architecture */
+
+.arch-diagram{
+ width:100%;
+ max-width:700px;
+ margin:auto;
+ display:block;
+ background:#070b18;
+ border:1px solid var(--border);
+}
+
 .arch{
-max-width:700px;
-margin:auto;
-display:flex;
-flex-direction:column;
+ max-width:700px;
+ margin:40px auto 0 auto;
+ display:flex;
+ flex-direction:column;
+ gap:6px;
 }
 
 .layer{
-padding:18px;
-border:1px solid #243a5f;
-margin:6px 0;
-text-align:center;
-background:#0b1326;
-cursor:pointer;
-transition:0.2s
+ padding:16px;
+ text-align:center;
+ background:var(--panel);
+ border:1px solid var(--border);
+ cursor:pointer;
+ transition:.2s;
 }
 
-.layer:hover{
-background:#13203b
-}
+.layer:hover{background:#13203b}
 
 .layer.active{
-border-color:#00d4ff;
-box-shadow:0 0 15px #00d4ff55
+ border-color:var(--accent);
+ box-shadow:0 0 12px rgba(0,212,255,.4);
 }
 
 .arch-desc{
-margin-top:20px;
-padding:20px;
-background:#0b1326;
-border:1px solid #243a5f
+ margin-top:20px;
+ padding:18px;
+ background:var(--panel);
+ border:1px solid var(--border);
 }
-
-.code{background:#0b1326;border:1px solid #223455;padding:16px;border-radius:6px;font-size:13px}
 
 </style>
 </head>
+
 <body>
 
-<nav>
-<a href="#" onclick="openPage('home')">Home</a>
-<a href="#" onclick="openPage('download')">Download</a>
-<a href="#" onclick="openPage('architecture')">Architecture</a>
-<a href="#" onclick="openPage('docs')">Documentation</a>
-<a href="#" onclick="openPage('community')">Community</a>
-<a href="#" onclick="openPage('github')">GitHub</a>
-</nav>
+<nav id="nav"></nav>
 
 <!-- HOME -->
 <div class="page active" id="home">
+
 <header>
 <h1>AI_OS</h1>
 <p>Artificial Intelligence Operating System</p>
@@ -88,29 +172,31 @@ border:1px solid #243a5f
 
 <section>
 <h2>Next Generation Operating System</h2>
-<p>AI_OS — операционная система нового поколения с интегрированным искусственным интеллектом, microkernel архитектурой и GPU ускоренным интерфейсом.</p>
+<p>AI_OS — экспериментальная операционная система с microkernel архитектурой, встроенным искусственным интеллектом и GPU‑ускоренным интерфейсом.</p>
 </section>
 
 <section class="grid">
+
 <div class="card">
 <h3>AI Native</h3>
-<p>AI встроен в систему: команды, поиск, диагностика.</p>
+<p>Интеллектуальный помощник встроен прямо в систему.</p>
 </div>
 
 <div class="card">
 <h3>Modern Kernel</h3>
-<p>C++ microkernel с высокой безопасностью.</p>
+<p>C++ microkernel архитектура.</p>
 </div>
 
 <div class="card">
 <h3>GPU Interface</h3>
-<p>Интерфейс на базе Vulkan.</p>
+<p>Графическая система на базе Vulkan.</p>
 </div>
 
 <div class="card">
 <h3>Cross Platform</h3>
 <p>Поддержка x86_64 и ARM64.</p>
 </div>
+
 </section>
 </div>
 
@@ -118,9 +204,9 @@ border:1px solid #243a5f
 <div class="page" id="download">
 <section>
 <h2>Download</h2>
-<p>Скачать AI_OS.</p>
 
 <div class="grid">
+
 <div class="card">
 <h3>ISO Image</h3>
 <a class="btn">Download ISO</a>
@@ -128,13 +214,14 @@ border:1px solid #243a5f
 
 <div class="card">
 <h3>Source Code</h3>
-<a class="btn" onclick="openPage('github')">GitHub</a>
+<a class="btn" data-page="github">GitHub</a>
 </div>
 
 <div class="card">
 <h3>Documentation</h3>
-<a class="btn" onclick="openPage('docs')">Docs</a>
+<a class="btn" data-page="docs">Docs</a>
 </div>
+
 </div>
 </section>
 </div>
@@ -142,12 +229,9 @@ border:1px solid #243a5f
 <!-- ARCHITECTURE -->
 <div class="page" id="architecture">
 <section>
-<h2>Interactive System Architecture</h2>
-<p>Нажмите на слой архитектуры чтобы увидеть описание.</p>
+<h2>System Architecture</h2>
 
-<!-- visual diagram -->
-<svg viewBox="0 0 600 420" style="width:100%;max-width:700px;margin:auto;display:block;background:#070b18;border:1px solid #1c2c4a">
-
+<svg viewBox="0 0 600 420" class="arch-diagram">
 <rect x="100" y="20" width="400" height="50" fill="#1b2c4d" stroke="#00d4ff"/>
 <text x="300" y="50" text-anchor="middle" fill="#cfe3ff">AI Layer</text>
 
@@ -155,7 +239,7 @@ border:1px solid #243a5f
 <text x="300" y="120" text-anchor="middle" fill="#cfe3ff">GUI Layer</text>
 
 <rect x="100" y="160" width="400" height="50" fill="#13203b" stroke="#00d4ff"/>
-<text x="300" y="190" text-anchor="middle" fill="#cfe3ff">Runtime Layer</text>
+<text x="300" y="190" text-anchor="middle" fill="#cfe3ff">Runtime</text>
 
 <rect x="100" y="230" width="400" height="50" fill="#101a30" stroke="#00d4ff"/>
 <text x="300" y="260" text-anchor="middle" fill="#cfe3ff">System API</text>
@@ -165,17 +249,9 @@ border:1px solid #243a5f
 
 <rect x="100" y="370" width="400" height="40" fill="#0a1220" stroke="#00d4ff"/>
 <text x="300" y="395" text-anchor="middle" fill="#cfe3ff">Hardware</text>
-
 </svg>
 
-<div class="arch" style="margin-top:40px">
-<div class="layer" onclick="showLayer('ai', this)">AI Layer</div>
-<div class="layer" onclick="showLayer('gui', this)">GUI Layer</div>
-<div class="layer" onclick="showLayer('runtime', this)">Runtime Layer</div>
-<div class="layer" onclick="showLayer('system', this)">System API</div>
-<div class="layer" onclick="showLayer('kernel', this)">Kernel</div>
-<div class="layer" onclick="showLayer('hardware', this)">Hardware</div>
-</div>
+<div class="arch" id="archLayers"></div>
 
 <div class="arch-desc" id="archDesc">Выберите слой архитектуры.</div>
 
@@ -186,111 +262,37 @@ border:1px solid #243a5f
 <div class="page" id="docs">
 <section>
 <h2>Documentation</h2>
-<p>Документация AI_OS вдохновлена стилем документации ядра Linux и предназначена для разработчиков системного уровня.</p>
 
-<h3>1. Getting Started</h3>
-<p>Минимальные шаги для запуска AI_OS в эмуляторе.</p>
-<div class="code">
-# clone repository
- git clone https://github.com/ai-os/ai-os
+<div class="code">git clone https://github.com/ai-os/ai-os
+cd ai-os
+make kernel
+make run</div>
 
- cd ai-os
+<br>
 
- # build kernel
- make kernel
-
- # run in qemu
- make run
-</div>
-
-<h3>2. System Requirements</h3>
-<div class="code">
-CPU: x86_64 or ARM64
-RAM: 2 GB minimum
-Disk: 4 GB
-Build tools: gcc, clang, make, qemu
-</div>
-
-<h3>3. Kernel Architecture</h3>
-<p>Ядро AI_OS использует microkernel архитектуру. Основные компоненты:</p>
 <div class="grid">
+
 <div class="card">
-<h3>Scheduler</h3>
-<p>Планировщик управляет потоками и распределяет CPU время между процессами.</p>
+<h3>Kernel</h3>
+<p>Scheduler, memory manager, interrupts.</p>
 </div>
-<div class="card">
-<h3>Memory Manager</h3>
-<p>Управляет виртуальной памятью, страницами и таблицами страниц.</p>
-</div>
-<div class="card">
-<h3>IPC</h3>
-<p>Механизм межпроцессного взаимодействия между сервисами системы.</p>
-</div>
+
 <div class="card">
 <h3>Drivers</h3>
-<p>Модульная система драйверов для устройств.</p>
-</div>
-</div>
-
-<h3>4. Kernel Directory Layout</h3>
-<div class="code">
-/kernel
-  /arch
-  /memory
-  /scheduler
-  /ipc
-  /drivers
-  /fs
+<p>Device driver subsystem.</p>
 </div>
 
-<h3>5. Writing a Driver</h3>
-<p>Пример простого драйвера устройства.</p>
-<div class="code">
-#include <aios/driver.h>
-
-void init_driver(){
-    register_device("example_device");
-}
+<div class="card">
+<h3>Filesystem</h3>
+<p>Modular filesystem architecture.</p>
 </div>
 
-<h3>6. System Calls</h3>
-<p>Системные вызовы позволяют программам взаимодействовать с ядром.</p>
-<div class="code">
-int sys_write(int fd, const char* buffer, int size);
-int sys_read(int fd, char* buffer, int size);
+<div class="card">
+<h3>AI Modules</h3>
+<p>Machine learning integration.</p>
 </div>
 
-<h3>7. File System</h3>
-<p>AI_OS поддерживает модульную файловую систему.</p>
-<div class="code">
-/
- /bin
- /system
- /drivers
- /users
 </div>
-
-<h3>8. Building Applications</h3>
-<p>Пример компиляции программы для AI_OS.</p>
-<div class="code">
-gcc hello.c -o hello
-</div>
-
-<h3>9. AI Modules</h3>
-<p>AI модули позволяют интегрировать машинное обучение в систему.</p>
-<div class="code">
-import aios
-
-ai = aios.load_model("assistant")
-ai.run()
-</div>
-
-<h3>10. Debugging</h3>
-<p>Для отладки используется последовательный вывод и QEMU debug.</p>
-<div class="code">
-make debug
-</div>
-
 </section>
 </div>
 
@@ -300,19 +302,20 @@ make debug
 <h2>Community</h2>
 
 <div class="grid">
+
 <div class="card">
 <h3>Forum</h3>
-<p>Обсуждение разработки.</p>
+<p>Developer discussions.</p>
 </div>
 
 <div class="card">
 <h3>Discord</h3>
-<p>Чат разработчиков.</p>
+<p>Real‑time chat.</p>
 </div>
 
 <div class="card">
 <h3>Contribute</h3>
-<p>Участвуйте в разработке ядра и модулей.</p>
+<p>Help develop the OS.</p>
 </div>
 
 </div>
@@ -325,30 +328,7 @@ make debug
 <section>
 <h2>GitHub</h2>
 
-<div class="card">
-<h3>Main Repository</h3>
-<div class="code">
-https://github.com/ai-os/ai-os
-</div>
-</div>
-
-<div class="grid">
-<div class="card">
-<h3>Issues</h3>
-<p>Bug tracking</p>
-</div>
-
-<div class="card">
-<h3>Pull Requests</h3>
-<p>Code contributions</p>
-</div>
-
-<div class="card">
-<h3>CI Build</h3>
-<p>Automated builds with GitHub Actions</p>
-</div>
-
-</div>
+<div class="code">https://github.com/ai-os/ai-os</div>
 
 </section>
 </div>
@@ -359,53 +339,62 @@ AI_OS Project — Artificial Intelligence Operating System
 
 <script>
 
+/* navigation */
+
+const pages=["home","download","architecture","docs","community","github"]
+
+const nav=document.getElementById("nav")
+
+pages.forEach(p=>{
+ const link=document.createElement("a")
+ link.textContent=p.charAt(0).toUpperCase()+p.slice(1)
+ link.dataset.page=p
+ nav.appendChild(link)
+})
+
 function openPage(id){
-
-const pages=document.querySelectorAll('.page')
-
-pages.forEach(p=>p.classList.remove('active'))
-
-document.getElementById(id).classList.add('active')
-
-window.scrollTo(0,0)
-
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+ document.getElementById(id).classList.add('active')
+ window.scrollTo(0,0)
 }
+
+nav.addEventListener("click",e=>{
+ if(e.target.dataset.page){
+  openPage(e.target.dataset.page)
+ }
+})
+
+/* architecture layers */
 
 const archData={
-
-ai:"AI Layer: голосовой помощник, интеллектуальный поиск, автоматизация задач.",
-
-gui:"GUI Layer: рабочий стол, оконный менеджер и системный интерфейс.",
-
-runtime:"Runtime: .NET NativeAOT, Python runtime и JavaScript engine.",
-
-system:"System API: системные вызовы, IPC, файловая система и сеть.",
-
-kernel:"Kernel: управление памятью, планировщик процессов, драйверы устройств.",
-
-hardware:"Hardware: CPU, GPU, RAM, диски и периферия."
-
+ "AI Layer":"AI assistant, automation and intelligent search.",
+ "GUI Layer":"Desktop shell and window manager.",
+ "Runtime":"Execution environment for applications.",
+ "System API":"System calls and core OS services.",
+ "Kernel":"Memory manager, scheduler, drivers.",
+ "Hardware":"CPU, GPU, RAM, storage and devices."
 }
 
-function showLayer(layer, element){
-
+const archContainer=document.getElementById("archLayers")
 const desc=document.getElementById("archDesc")
 
-const layers=document.querySelectorAll(".layer")
+Object.keys(archData).forEach(name=>{
 
-layers.forEach(l=>l.classList.remove("active"))
+ const el=document.createElement("div")
+ el.className="layer"
+ el.textContent=name
 
-if(element){
- element.classList.add("active")
-}
+ el.onclick=()=>{
 
-if(archData[layer]){
- desc.innerText = archData[layer]
-}else{
- desc.innerText = "Layer description not found." 
-}
+ document.querySelectorAll('.layer').forEach(l=>l.classList.remove('active'))
+ el.classList.add('active')
+ desc.textContent=archData[name]
 
-}
+ }
+
+ archContainer.appendChild(el)
+
+})
 
 </script>
 
