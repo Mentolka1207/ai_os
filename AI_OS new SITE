@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI_OS</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/openpgp@5.10.0/dist/openpgp.min.js"></script>
+<style>
+body{margin:0;background:linear-gradient(135deg,#05070f,#0a1220);color:#e6f0ff;font-family:'JetBrains Mono'}
+nav{display:flex;justify-content:center;gap:20px;padding:15px;background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.15)}
+nav a{color:#8fb3ff;text-decoration:none;cursor:pointer}
+.page{display:none;padding:60px 20px;max-width:1000px;margin:auto}
+.page.active{display:block}
+.card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(14px);padding:20px;border-radius:12px;margin-top:20px}
+.btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:10px;color:white;border-radius:8px;text-decoration:none;cursor:pointer;margin-right:10px}
+.code{background:rgba(0,0,0,0.3);padding:10px;margin-top:10px;white-space:pre-wrap;border-radius:8px}
+</style>
+</head>
+<body>
+<nav>
+ <a data-page="home">Home</a>
+ <a data-page="download">Download</a>
+ <a data-page="installer">Installer</a>
+ <a data-page="requirements">Requirements</a>
+</nav>
+
+<div id="home" class="page active">
+ <h1>AI_OS</h1>
+ <p>Artificial Intelligence Operating System designed for modern AI workloads, development, and experimentation.</p>
+ <div class="card">
+  <h3>Features</h3>
+  <ul>
+   <li>Lightweight and fast</li>
+   <li>Built-in AI tools support</li>
+   <li>Secure system with GPG verification</li>
+   <li>Developer-friendly environment</li>
+  </ul>
+ </div>
+</div>
+
+<div id="download" class="page">
+ <h2>Download</h2>
+ <div class="card">
+  <p>Download the latest version of AI_OS:</p>
+  <a class="btn" id="stableISO">Download Stable</a>
+  <a class="btn" id="devISO">Download Dev</a>
+
+  <div class="code" id="checksumBox">Loading checksums...</div>
+  <div class="code" id="securityStatus">Security status...</div>
+ </div>
+</div>
+
+<div id="installer" class="page">
+ <h2>Installer Guide</h2>
+ <div class="card">
+  <p><b>Step 1:</b> Download the ISO image from the Download page.</p>
+  <p><b>Step 2:</b> Create a bootable USB using tools like Rufus or dd.</p>
+  <p><b>Step 3:</b> Reboot your computer and boot from USB.</p>
+  <p><b>Step 4:</b> Follow on-screen installer instructions.</p>
+  <p><b>Step 5:</b> Reboot into your new AI_OS system.</p>
+ </div>
+</div>
+
+<div id="requirements" class="page">
+ <h2>System Requirements</h2>
+ <div class="card">
+  <h3>Minimum</h3>
+  <ul>
+   <li>CPU: 2 cores</li>
+   <li>RAM: 4 GB</li>
+   <li>Storage: 20 GB</li>
+  </ul>
+
+  <h3>Recommended</h3>
+  <ul>
+   <li>CPU: 4+ cores</li>
+   <li>RAM: 8–16 GB</li>
+   <li>Storage: SSD</li>
+  </ul>
+
+  <h3>AI Workloads</h3>
+  <ul>
+   <li>GPU with CUDA/OpenCL</li>
+   <li>16+ GB RAM</li>
+  </ul>
+ </div>
+</div>
+
+<script>
+// navigation
+function openPage(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ history.pushState({},'', '/'+id);
+}
+
+document.querySelectorAll('nav a').forEach(a=>{
+ a.onclick=()=>openPage(a.dataset.page);
+});
+
+// download + gpg
+window.addEventListener('DOMContentLoaded',async()=>{
+ const stableBtn=document.getElementById('stableISO');
+ if(!stableBtn) return;
+
+ const check=async u=>{try{return (await fetch(u,{method:'HEAD'})).ok}catch{return false}};
+ const load=async u=>{try{let r=await fetch(u);return r.ok?await r.text():null}catch{return null}};
+
+ const stable=await check('ai_os_stable.iso');
+ const dev=await check('ai_os_dev.iso');
+
+ stableBtn.onclick=e=>{
+  e.preventDefault();
+  if(!stable){alert('Stable ISO not available');return}
+  location.href='ai_os_stable.iso';
+ };
+
+ document.getElementById('devISO').onclick=e=>{
+  e.preventDefault();
+  if(!dev){alert('Dev ISO not available');return}
+  location.href='ai_os_dev.iso';
+ };
+
+ const sum=await load('checksums.sha256');
+ const box=document.getElementById('checksumBox');
+ box.textContent=sum||'No checksums available';
+
+ try{
+  const sig=await load('checksums.sha256.asc');
+  const key=await load('public.key');
+
+  if(!sum||!sig||!key){
+    box.textContent += "\nGPG: missing";
+    document.getElementById('securityStatus').textContent='UNKNOWN';
+    return;
+  }
+
+  const msg=await openpgp.createMessage({text:sum});
+  const signature=await openpgp.readSignature({armoredSignature:sig});
+  const pub=await openpgp.readKey({armoredKey:key});
+
+  const res=await openpgp.verify({message:msg,signature,verificationKeys:pub});
+  await res.signatures[0].verified;
+
+  box.textContent += "\nGPG: valid";
+  document.getElementById('securityStatus').textContent='TRUSTED';
+
+ }catch{
+  box.textContent += "\nGPG: invalid";
+  document.getElementById('securityStatus').textContent='UNTRUSTED';
+ }
+});
+</script>
+</body>
+</html>
