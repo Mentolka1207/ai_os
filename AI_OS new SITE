@@ -44,7 +44,7 @@ nav a{color:#8fb3ff;text-decoration:none;cursor:pointer}
  <div class="card">
   <p>Download the latest version of AI_OS:</p>
   <a class="btn" id="stableISO">Download Stable</a>
-  <a class="btn" id="devISO">Download Dev</a>
+  
 
   <div class="code" id="checksumBox">Loading checksums...</div>
   <div class="code" id="securityStatus">Security status...</div>
@@ -108,19 +108,17 @@ window.addEventListener('DOMContentLoaded',async()=>{
  const load=async u=>{try{let r=await fetch(u);return r.ok?await r.text():null}catch{return null}};
 
  const stable=await check('ai_os_stable.iso');
- const dev=await check('ai_os_dev.iso');
+ 
 
  stableBtn.onclick=e=>{
   e.preventDefault();
   if(!stable){alert('Stable ISO not available');return}
-  location.href='ai_os_stable.iso';
+  // always fetch latest version (cache-busting)
+  const url = 'aios.iso?ts=' + Date.now();
+  location.href = url;
  };
 
- document.getElementById('devISO').onclick=e=>{
-  e.preventDefault();
-  if(!dev){alert('Dev ISO not available');return}
-  location.href='ai_os_dev.iso';
- };
+ 
 
  const sum=await load('checksums.sha256');
  const box=document.getElementById('checksumBox');
